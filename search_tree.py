@@ -84,3 +84,4 @@ def encontrar_minimo(raiz):
     while actual.izquierda is not None:
         actual = actual.izquierda
     return actual
+
