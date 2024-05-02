@@ -8,9 +8,11 @@ while True:
     print("2. Mostrar los tres recorridos")
     print("3. Buscar un producto en específico")
     print("4. Reemplazar un producto en específico")
-    print("5. Eliminar un producto")
-    print("6. Mostrar los productos según el orden binario")
-    print("7. Salir")
+    print("5. Comprar productos")
+    print("6. Vender productos")
+    print("7. Eliminar un producto")
+    print("8. Mostrar los productos según el orden binario")
+    print("9. Salir")
 
     main_menu = input("Ingrese una opción (1-7): ")
 
@@ -61,15 +63,39 @@ while True:
             print("Producto no encontrado.")
 
     elif main_menu == "5":
+        codigo_comprar = int(input("Ingrese el código del producto a comprar: "))
+        producto_comprar = buscar_producto(raiz, codigo_comprar)
+        if producto_comprar:
+            cantidad_comprar = int(input("Ingrese la cantidad a comprar: "))
+            producto_comprar.producto.cantidad += cantidad_comprar
+            print("Compra realizada correctamente.")
+        else:
+            print("Producto no encontrado.")
+
+    elif main_menu == "6":
+        codigo_vender = int(input("Ingrese el código del producto a vender: "))
+        producto_vender = buscar_producto(raiz, codigo_vender)
+        if producto_vender:
+            cantidad_vender = int(input("Ingrese la cantidad a vender: "))
+            if cantidad_vender <= producto_vender.producto.cantidad:
+                producto_vender.producto.cantidad -= cantidad_vender
+                print("Venta realizada correctamente.")
+            else:
+                print("No hay suficientes productos para vender.")
+        else:
+            print("Producto no encontrado.")
+
+
+    elif main_menu == "7":
         codigo_eliminar = int(input("Ingrese el código del producto a eliminar: "))
         raiz = eliminar_producto(raiz, codigo_eliminar)
         print("Producto eliminado correctamente.")
 
-    elif main_menu == "6":
-        print("Recorrido Inorden:")
-        inorden(raiz)
+    elif main_menu == "8":
+        print("\nTotal de productos")
+        mostrar_productos(raiz)
 
-    elif main_menu == "7":
+    elif main_menu == "9":
         print("Saliendo del programa...")
         break
     else:

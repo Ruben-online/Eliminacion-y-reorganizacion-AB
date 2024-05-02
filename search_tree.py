@@ -6,11 +6,13 @@ class Producto:
         self.precio = precio
         self.cantidad = cantidad
 
+
 class NodoProducto:
     def __init__(self, producto):
         self.producto = producto
         self.izquierda = None
         self.derecha = None
+
 
 def insertar_producto(raiz, producto):
     if raiz is None:
@@ -22,11 +24,13 @@ def insertar_producto(raiz, producto):
             raiz.derecha = insertar_producto(raiz.derecha, producto)
     return raiz
 
+
 def preorden(raiz):
     if raiz:
         print(raiz.producto.nombre)
         preorden(raiz.izquierda)
         preorden(raiz.derecha)
+
 
 def inorden(raiz):
     if raiz:
@@ -34,11 +38,13 @@ def inorden(raiz):
         print(raiz.producto.nombre)
         inorden(raiz.derecha)
 
+
 def postorden(raiz):
     if raiz:
         postorden(raiz.izquierda)
         postorden(raiz.derecha)
         print(raiz.producto.nombre)
+
 
 def buscar_producto(raiz, codigo):
     if raiz is None or raiz.producto.codigo == codigo:
@@ -46,6 +52,7 @@ def buscar_producto(raiz, codigo):
     if raiz.producto.codigo < codigo:
         return buscar_producto(raiz.derecha, codigo)
     return buscar_producto(raiz.izquierda, codigo)
+
 
 def reemplazar_nodo(raiz, codigo, nuevo_producto):
     if raiz is None:
@@ -57,6 +64,7 @@ def reemplazar_nodo(raiz, codigo, nuevo_producto):
     else:
         raiz.izquierda = reemplazar_nodo(raiz.izquierda, codigo, nuevo_producto)
     return raiz
+
 
 def eliminar_producto(raiz, codigo):
     if raiz is None:
@@ -79,9 +87,17 @@ def eliminar_producto(raiz, codigo):
         raiz.derecha = eliminar_producto(raiz.derecha, temp.producto.codigo)
     return raiz
 
+
 def encontrar_minimo(raiz):
     actual = raiz
     while actual.izquierda is not None:
         actual = actual.izquierda
     return actual
 
+
+def mostrar_productos(raiz):
+    if raiz:
+        mostrar_productos(raiz.izquierda)
+        print("Nombre:", raiz.producto.nombre)
+        print("Cantidad:", raiz.producto.cantidad)
+        mostrar_productos(raiz.derecha)
